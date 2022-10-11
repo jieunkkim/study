@@ -10,7 +10,6 @@
       <li>username=${member.username}</li>
       <li>age=${member.age}</li>
   </ul>
-  <a href="/servlet-mvc/members/new-form">이전</a>
-  <a href="/servlet-mvc/members">목록보기</a>
+  <a href="/index.html">메인</a>
 </body>
 </html>

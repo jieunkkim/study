@@ -22,6 +22,6 @@
      </c:forEach>
      </tbody>
   </table>
-  <a href="/servlet-mvc/members/new-form">입력화면으로</a>
+  <a href="/index.html">메인</a>
 </body>
 </html>
