@@ -1,0 +1,32 @@
+package study.springmvc.logging;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+/**
+ *  SLF4J - http://www.slf4j.org
+ *  Logback - http://logback.qos.ch
+ *  Springboot가 제공하는 로그 기능
+ *  https://docs.spring.io/spring-boot/docs/current/reference/html/spring-boot-features.html#boot-features-logging
+ */
+
+//@Sl4j
+@RestController
+public class LogTestController {
+
+    private final Logger log = LoggerFactory.getLogger(getClass());
+
+    @RequestMapping("/log-test")
+    public String logTest() {
+        String name = "Spring";
+        log.trace("trace log = {}", name);
+        log.debug("debug log = {}", name);
+        log.info("info log = {}", name);
+        log.warn("warn log = {}", name);
+        log.error("error log = {}", name);
+
+        return "ok";
+    }
+}
