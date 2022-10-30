@@ -1,0 +1,52 @@
+<!DOCTYPE HTML>
+<!-- thymeleaf 적용 -->
+<!-- html 파일을 absolute path로 열면 th:를 무시하게 되지만, 서버사이드에서 view로 랜더링 될 때는 th:가 우선으로 적용됨  -->
+<!-- jsp 처럼 html에 중간에 java코드가 섞인 구조가 아니라 (심지어 서버통해서만 열 수 있음), html 모양 그대로 유지 가능 (= natural templates)-->
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="utf-8">
+  <!-- th로 정의하면 기존 href 속성을 덮어버림. ../와 같은 상대경로를 소스에 노출시키는 건 지양-->
+  <link th:href="@{/css/bootstrap.min.css}"
+   href="../css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+<div class="container" style="max-width: 600px">
+  <div class="py-5 text-center">
+    <h2>상품 목록</h2></div>
+  <div class="row">
+    <div class="col">
+      <!-- ||를 사용하면 리터럴 대체 ('test ' + ${user.name} 처럼 사용않고 문자 그대로 'test ${user.nam}' 처럼 그대로 사용할 수 있는듯 -->
+      <!-- 아래처럼 href를 적을 땐 '를 escape 해줬어야 했음 (\') -->
+      <button class="btn btn-primary float-end"
+              onclick="location.href='addForm.html'"
+              th:onclick="|location.href='@{/basic/items/add}'|"
+              type="button">상품 등록
+      </button>
+    </div>
+  </div>
+  <hr class="my-4">
+  <div>
+    <table class="table">
+      <thead>
+      <tr>
+        <th>ID</th>
+        <th>상품명</th>
+        <th>가격</th>
+        <th>수량</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr th:each="item : ${items}">
+        <!-- {itemId}(itemId=${item.id}) 식으로 변수값을 넣을 수 있음 -->
+        <!-- 링크도 리터럴 대체문법으로 간단히 가능 -->
+        <td><a href="item.html" th:href="@{/basic/items/{itemId}(itemId=${item.id})}" th:text="${item.id}">회원 Id</a></td>
+        <td><a href="item.html" th:href="@{|/basic/items/${item.id}|}" th:text="${item.itemName}">상품명</a></td>
+        <td th:text="${item.price}">10000</td>
+        <td th:text="${item.quantity}">10</td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+</div> <!-- /container -->
+</body>
+</html>
